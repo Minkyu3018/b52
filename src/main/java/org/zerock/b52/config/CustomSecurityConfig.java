@@ -12,7 +12,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.zerock.b52.security.CustomOAuth2UserService;
 import org.zerock.b52.security.handler.CustomAccessDeniedHandler;
+import org.zerock.b52.security.handler.CustomOAuthSuccessHandler;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -26,6 +28,8 @@ public class CustomSecurityConfig {
 
     private final DataSource dataSource;
 
+    
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -37,7 +41,7 @@ public class CustomSecurityConfig {
 
         log.info("filter chain -------------");
 
-        // http.formLogin(Customizer.withDefaults());
+        //http.formLogin(Customizer.withDefaults());
         // /login 경로 로그인 페이지 띄우기, 람다식
 
         http.formLogin(config -> {
@@ -56,6 +60,12 @@ public class CustomSecurityConfig {
 
         http.csrf(config -> {
             config.disable();
+        });
+
+        http.oauth2Login(config -> {
+            config.loginPage("/member/signin");
+            config.successHandler((new CustomOAuthSuccessHandler()));
+            
         });
 
         

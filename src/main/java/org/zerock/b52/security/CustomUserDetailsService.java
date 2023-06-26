@@ -35,19 +35,34 @@ public class CustomUserDetailsService implements UserDetailsService{
 
         log.info("-----------------------");
 
+        MemberDTO memberDTO = null;
         MemberReadDTO readDTO = memberMapper.selectOne(username);
 
-        MemberDTO memberDTO = 
-        new MemberDTO(username,
-
-            readDTO.getMpw(),
-            readDTO.getMname(),
+        log.info("======시작=%+%+%+%+%+%+%+%" + readDTO);
+        if(readDTO != null){
             
+            // 아니라면
+            memberDTO = new MemberDTO(
+                readDTO.getEmail(), 
+                readDTO.getMpw(), 
+                readDTO.getMname(), 
+                readDTO.getRolenames());
+
+
+            return memberDTO;
+
+        }
+
+
+        memberDTO = 
+        new MemberDTO(
+            username,
+            readDTO.getMpw(),
+            readDTO.getMname(),            
             readDTO.getRolenames()
         );
             
-            
-
+          
         return memberDTO;
 
     }

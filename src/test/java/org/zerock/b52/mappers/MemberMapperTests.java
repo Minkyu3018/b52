@@ -28,7 +28,7 @@ public class MemberMapperTests {
     @Test
 	void TestInsert(){
 
-        String email = "MINKYU87@naver.com";
+        String email = "vltfhem90@naver.com";
         String mpw = encoder.encode("1111");
         String mname = "MINKYU33";
 
