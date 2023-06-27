@@ -28,8 +28,6 @@ public class CustomSecurityConfig {
 
     private final DataSource dataSource;
 
-    
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

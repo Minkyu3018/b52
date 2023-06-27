@@ -35,4 +35,11 @@ public class MemberController {
 
     }
 
+    @PreAuthorize("permitAll")
+    @GetMapping("/login")
+    public void login(){
+        log.info("login...................");
+
+    }
+
 }
